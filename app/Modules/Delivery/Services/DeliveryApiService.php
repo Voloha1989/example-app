@@ -31,12 +31,11 @@ class DeliveryApiService extends RemoteApiService
         foreach ($listTransportation as $transportation) {
             try {
                 $data = $this->sendRequestTransportCompanies($transportation->url, $deliveryRequestDTO->all());
-                $listDeliveries->add($this->getDeliveryDataFormat($transportation, $data));
             } catch (GuzzleException $e) {
                 Log::error($e->getMessage());
                 $data = (new TransportCompanyApiService())->getGeneratedResponse();
-                $listDeliveries->add($this->getDeliveryDataFormat($transportation, $data));
             }
+            $listDeliveries->add($this->getDeliveryDataFormat($transportation, $data));
         }
 
         return $listDeliveries;
