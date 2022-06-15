@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Modules\Delivery\Enums;
+namespace App\Modules\Delivery\Enums;
 
 
 class DeliveryType

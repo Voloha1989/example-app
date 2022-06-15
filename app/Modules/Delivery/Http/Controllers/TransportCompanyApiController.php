@@ -1,15 +1,15 @@
 <?php
 
 
-namespace Modules\Delivery\Http\Controllers;
+namespace App\Modules\Delivery\Http\Controllers;
 
 
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Http\JsonResponse;
 
-class TransportCompanyController extends Controller
+class TransportCompanyApiController extends Controller
 {
     /**
      * @param Request $request

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Modules\Delivery\Http\Requests;
+namespace App\Modules\Delivery\Http\Requests;
 
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeliveryRequest extends FormRequest
+class DeliveryApiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

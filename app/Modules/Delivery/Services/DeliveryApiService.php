@@ -1,20 +1,20 @@
 <?php
 
 
-namespace Modules\Delivery\Services;
+namespace App\Modules\Delivery\Services;
 
 
 use Carbon\Carbon;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Facades\Log;
-use Modules\Delivery\Dto\DeliveryFormatDTO;
-use Modules\Delivery\Dto\DeliveryRequestDTO;
-use Modules\Delivery\Enums\DeliveryType;
-use Modules\Delivery\Models\Transportation;
 use Illuminate\Support\Collection;
+use App\Modules\Delivery\Dto\DeliveryFormatDTO;
+use App\Modules\Delivery\Dto\DeliveryRequestDTO;
+use App\Modules\Delivery\Enums\DeliveryType;
+use App\Modules\Delivery\Models\Transportation;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
-class DeliveryService extends RemoteApiService
+class DeliveryApiService extends RemoteApiService
 {
     /**
      * @param DeliveryRequestDTO $deliveryRequestDTO
@@ -34,7 +34,7 @@ class DeliveryService extends RemoteApiService
                 $listDeliveries->add($this->getDeliveryDataFormat($transportation, $data));
             } catch (GuzzleException $e) {
                 Log::error($e->getMessage());
-                $data = (new TransportCompanyService())->getGeneratedResponse();
+                $data = (new TransportCompanyApiService())->getGeneratedResponse();
                 $listDeliveries->add($this->getDeliveryDataFormat($transportation, $data));
             }
         }

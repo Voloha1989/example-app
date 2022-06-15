@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Modules\Delivery\Services;
+namespace App\Modules\Delivery\Services;
 
 
 use Carbon\Carbon;
 
-class TransportCompanyService
+class TransportCompanyApiService
 {
     /**
      * @return array

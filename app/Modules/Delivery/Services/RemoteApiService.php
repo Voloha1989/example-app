@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Delivery\Services;
+namespace App\Modules\Delivery\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -47,7 +47,7 @@ abstract class RemoteApiService
         $result = '?';
 
         foreach ($options as $key => $value) {
-            $result .= $key . '=' .$value .'&';
+            $result .= $key . '=' . $value . '&';
         }
 
         return rtrim($result, "&");

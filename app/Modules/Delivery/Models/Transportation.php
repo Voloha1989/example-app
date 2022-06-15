@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Delivery\Models;
+namespace App\Modules\Delivery\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;

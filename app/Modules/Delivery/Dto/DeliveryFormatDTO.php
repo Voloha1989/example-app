@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Modules\Delivery\Dto;
+namespace App\Modules\Delivery\Dto;
 
 
 use Spatie\DataTransferObject\DataTransferObject;

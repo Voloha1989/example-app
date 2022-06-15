@@ -12,7 +12,7 @@
 */
 
 use Illuminate\Support\Facades\Route;
-use Modules\Delivery\Http\Controllers\DeliveryController;
+use App\Modules\Delivery\Http\Controllers\DeliveryController;
 
 Route::prefix('delivery')->group(function() {
     Route::get('/', [DeliveryController::class, 'index']);

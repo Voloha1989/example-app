@@ -1,9 +1,9 @@
 <?php
 
+use App\Modules\Delivery\Http\Controllers\DeliveryApiController;
+use App\Modules\Delivery\Http\Controllers\TransportCompanyApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Modules\Delivery\Http\Controllers\DeliveryController;
-use Modules\Delivery\Http\Controllers\TransportCompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +21,13 @@ Route::middleware('auth:api')->get('/delivery', function (Request $request) {
 });
 
 Route::group(['prefix' => 'delivery'], function () {
-    Route::get('/fast', [DeliveryController::class, 'fast']);
-    Route::get('/slow', [DeliveryController::class, 'slow']);
+    Route::get('/fast', [DeliveryApiController::class, 'fast']);
+    Route::get('/slow', [DeliveryApiController::class, 'slow']);
 });
 
 Route::group(['prefix' => 'transport-company'], function () {
     Route::group(['prefix' => 'calculation'], function () {
-        Route::get('/fast-delivery', [TransportCompanyController::class, 'calculationFastDelivery']);
-        Route::get('/slow-delivery', [TransportCompanyController::class, 'calculationSlowDelivery']);
+        Route::get('/fast-delivery', [TransportCompanyApiController::class, 'calculationFastDelivery']);
+        Route::get('/slow-delivery', [TransportCompanyApiController::class, 'calculationSlowDelivery']);
     });
 });
