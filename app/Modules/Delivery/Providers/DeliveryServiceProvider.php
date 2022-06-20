@@ -7,15 +7,8 @@ use Illuminate\Database\Eloquent\Factory;
 
 class DeliveryServiceProvider extends ServiceProvider
 {
-    /**
-     * @var string $moduleName
-     */
-    protected $moduleName = 'Delivery';
-
-    /**
-     * @var string $moduleNameLower
-     */
-    protected $moduleNameLower = 'delivery';
+    protected string $moduleName = 'Delivery';
+    protected string $moduleNameLower = 'delivery';
 
     /**
      * Boot the application events.

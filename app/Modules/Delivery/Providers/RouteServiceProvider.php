@@ -9,10 +9,8 @@ class RouteServiceProvider extends ServiceProvider
 {
     /**
      * The module namespace to assume when generating URLs to actions.
-     *
-     * @var string
      */
-    protected $moduleNamespace = 'App\Modules\Delivery\Http\Controllers';
+    protected string $moduleNamespace = 'App\Modules\Delivery\Http\Controllers';
 
     /**
      * Called before routes are registered.

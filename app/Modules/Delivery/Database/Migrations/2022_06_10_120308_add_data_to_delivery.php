@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::table('transportation')->insert([
+        DB::table('delivery')->insert([
             [
                 'id' => '1',
-                'name' => 'Fast Delivery',
+                'name' => 'Pizza delivery',
                 'company_name' => 'company 1',
-                'url' => Request::root() . ':8001/api/transport-company/calculation/fast-delivery',
+                'url' => Request::root() . ':3001/api/transport-company/calculation/fast-delivery',
                 'type' => 1,
                 'price' => 300,
                 'created_at' => Carbon::now(),
@@ -26,9 +26,9 @@ return new class extends Migration
             ],
             [
                 'id' => '2',
-                'name' => 'Fast Delivery',
+                'name' => 'Pizza delivery',
                 'company_name' => 'company 2',
-                'url' => Request::root() . ':8001/api/transport-company/calculation/fast-delivery',
+                'url' => Request::root() . ':3001/api/transport-company/calculation/fast-delivery',
                 'type' => 1,
                 'price' => 500,
                 'created_at' => Carbon::now(),
@@ -36,9 +36,9 @@ return new class extends Migration
             ],
             [
                 'id' => '3',
-                'name' => 'Slow Delivery',
+                'name' => 'Pizza delivery',
                 'company_name' => 'company 3',
-                'url' => Request::root() . ':8001/api/transport-company/calculation/slow-delivery',
+                'url' => Request::root() . ':3001/api/transport-company/calculation/slow-delivery',
                 'type' => 0,
                 'price' => 150,
                 'created_at' => Carbon::now(),
@@ -46,9 +46,9 @@ return new class extends Migration
             ],
             [
                 'id' => '4',
-                'name' => 'Slow Delivery',
+                'name' => 'Pizza delivery',
                 'company_name' => 'company 4',
-                'url' => Request::root() . ':8001/api/transport-company/calculation/slow-delivery',
+                'url' => Request::root() . ':3001/api/transport-company/calculation/slow-delivery',
                 'type' => 0,
                 'price' => 150,
                 'created_at' => Carbon::now(),
@@ -64,6 +64,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::table('transportation')->truncate();
+        DB::table('delivery')->truncate();
     }
 };

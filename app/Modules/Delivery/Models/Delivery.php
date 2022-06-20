@@ -17,10 +17,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $price
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @method static Builder|Transportation whereType($type)
+ * @method static Builder|Delivery whereType($type)
  */
 
-class Transportation extends Model
+class Delivery extends Model
 {
-    protected $table = 'transportation';
+    protected $table = 'delivery';
 }

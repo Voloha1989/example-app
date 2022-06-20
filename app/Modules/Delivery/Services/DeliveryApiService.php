@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 use App\Modules\Delivery\Dto\DeliveryFormatDTO;
 use App\Modules\Delivery\Dto\DeliveryRequestDTO;
 use App\Modules\Delivery\Enums\DeliveryType;
-use App\Modules\Delivery\Models\Transportation;
+use App\Modules\Delivery\Models\Delivery;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class DeliveryApiService extends RemoteApiService
@@ -24,37 +24,37 @@ class DeliveryApiService extends RemoteApiService
      */
     public function getDeliveryCalculation(DeliveryRequestDTO $deliveryRequestDTO, int $deliveryType): Collection
     {
-        $listDeliveries = new Collection();
+        $listDeliveryData = new Collection();
 
-        $listTransportation = $this->getListTransportation($deliveryType, $deliveryRequestDTO->companyName);
+        $listDeliveries = $this->getListDeliveries($deliveryType, $deliveryRequestDTO->companyName);
 
-        foreach ($listTransportation as $transportation) {
+        foreach ($listDeliveries as $delivery) {
             try {
-                $data = $this->sendRequestTransportCompanies($transportation->url, $deliveryRequestDTO->all());
+                $data = $this->sendRequestTransportCompanies($delivery->url, $deliveryRequestDTO->all());
             } catch (GuzzleException $e) {
                 Log::error($e->getMessage());
                 $data = (new TransportCompanyApiService())->getGeneratedResponse();
             }
-            $listDeliveries->add($this->getDeliveryDataFormat($transportation, $data));
+            $listDeliveryData->add($this->getDeliveryDataFormat($delivery, $data));
         }
 
-        return $listDeliveries;
+        return $listDeliveryData;
     }
 
     /**
      * @param int $deliveryType
      * @param string|null $companyName
-     * @return Collection|Transportation[]
+     * @return Collection|Delivery[]
      */
-    public function getListTransportation(int $deliveryType, string $companyName = null): array|Collection
+    public function getListDeliveries(int $deliveryType, string $companyName = null): array|Collection
     {
-        $listTransportation = Transportation::whereType($deliveryType);
+        $listDeliveries = Delivery::whereType($deliveryType);
 
         if ($companyName) {
-            $listTransportation->where('company_name', $companyName);
+            $listDeliveries->where('company_name', $companyName);
         }
 
-        return $listTransportation->get();
+        return $listDeliveries->get();
     }
 
     /**
@@ -75,18 +75,18 @@ class DeliveryApiService extends RemoteApiService
     }
 
     /**
-     * @param Transportation $transportation
+     * @param Delivery $delivery
      * @param array $data
      * @return DeliveryFormatDTO
      * @throws UnknownProperties
      */
-    public function getDeliveryDataFormat(Transportation $transportation, array $data): DeliveryFormatDTO
+    public function getDeliveryDataFormat(Delivery $delivery, array $data): DeliveryFormatDTO
     {
         return new DeliveryFormatDTO(
             [
-                'price' => $transportation->type == DeliveryType::FAST ?
-                    $data['price'] : $transportation->price * $data['coefficient'],
-                'date' => $transportation->type == DeliveryType::FAST ?
+                'price' => $delivery->type == DeliveryType::FAST ?
+                    $data['price'] : $delivery->price * $data['coefficient'],
+                'date' => $delivery->type == DeliveryType::FAST ?
                     Carbon::now()->addDays($data['period'])->format('Y-m-d') : $data['date'],
                 'error' => $data['error']
             ]
